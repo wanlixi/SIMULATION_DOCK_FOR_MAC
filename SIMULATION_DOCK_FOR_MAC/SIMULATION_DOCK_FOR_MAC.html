@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#wrap{
+				position: fixed;
+				bottom: 0;
+				/*height: 200px;*/
+				text-align: center;
+				width: 100%;
+			}
+			#wrap img{
+				width: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<img src="imgs/img_1.png" />
+			<img src="imgs/img_2.png" />
+			<img src="imgs/img_3.png" />
+			<img src="imgs/img_4.png" />
+			<img src="imgs/img_5.png" />
+			<img src="imgs/img_6.png" />
+			<img src="imgs/img_7.png" />
+			<img src="imgs/img_8.png" />
+			<img src="imgs/img_9.png" />
+			<img src="imgs/img_1.png" />
+			<img src="imgs/img_2.png" />
+			<!-- <img src="imgs/img_3.png" />
+			<img src="imgs/img_4.png" />
+			<img src="imgs/img_5.png" />
+			<img src="imgs/img_6.png" /> -->
+		</div>
+	</body>
+	<script type="text/javascript">
+		var wrap =document.querySelector("#wrap");
+		var imgs =wrap.children;
+		wrap.onmousemove =function(e){
+			var event =e||window.event;
+			var startX =event.clientX;
+			var startY =event.clientY;
+			//获取中心点的坐标  遍历每一个图标中心点的位置
+			for(var i =0;i<imgs.length;i++){
+				var centerX =imgs[i].offsetLeft +imgs[i].offsetWidth/2;
+				var centerY =wrap.offsetTop +imgs[i].offsetHeight/2;
+				//两点之间的距离
+				var dis =parseInt(Math.sqrt(Math.pow((startX-centerX),2)+Math.pow((startY-centerY),2)));
+//				console.log(dis);
+				var scale =1-dis/300;
+				if(scale<=0.5){
+					scale =0.5;
+				}
+				imgs[i].style.width =200*scale +"px";           
+			}
+		}
+		wrap.onmouseleave =function(){
+			for(var i =0;i<imgs.length;i++){
+				imgs[i].style.width ="100px";      
+			}
+		}
+	</script>
+</html>
